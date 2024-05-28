@@ -1,0 +1,55 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  logicalFilePath="changesets/202405141738-create-transactions-table.xml"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+  <changeSet id="3" author="Laura Tikker">
+    <createTable tableName="transactions" schemaName="ivybank">
+      <column name="id" type="bigserial">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="account_id" type="bigserial">
+        <constraints foreignKeyName="transactions_accounts_fk" references="ivybank.accounts(id)"
+          nullable="false"/>
+      </column>
+      <column name="amount" type="decimal(15,2)">
+      <constraints nullable="false"/>
+      </column>
+      <column name="amount_in_euros" type="decimal(15,2)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="currency" type="varchar(3)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="sender" type="text">
+        <constraints nullable="false"/>
+      </column>
+      <column name="receiver" type="text">
+        <constraints nullable="false"/>
+      </column>
+      <column name="initial_balance" type="decimal(15,2)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="final_balance" type="decimal(15,2)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="description" type="text"/>
+      <column name="credit_debit_indicator" type="varchar(4)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="created_at" type="timestamp with time zone" defaultValueDate="now()">
+        <constraints nullable="false"/>
+      </column>
+      <column name="created_by" type="varchar(100)" defaultValueComputed="upper(session_user)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="modified_at" type="timestamp with time zone" defaultValueDate="now()">
+        <constraints nullable="false"/>
+      </column>
+      <column name="modified_by" type="varchar(100)" defaultValueComputed="upper(session_user)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  ivy-bank-db:
+    image: postgres:16.3-alpine
+    ports:
+      - "6432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=ivybankdb
+    volumes:
+      - ./docker/init-ivy-bank-db.sql:/docker-entrypoint-initdb.d/init.sql
